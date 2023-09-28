@@ -1,0 +1,39 @@
+<div style="padding: 80px">
+<h1>Orders</h1>
+
+<% @orders.each do |order| %>
+ <div style="border-bottom: 2px solid black;margin-top: 30px"></div>
+ <div style="width: 100%; display:flex;">
+  <div style="width:50%">
+
+
+    <p> ID: <%= order.id%></p>
+    <p> Created At: <%= order.created_at%></p>
+    <p> Promotions Code: <%= order.promotion_code%></p>
+    <p> Discount Codes: <%= order.discount_code%></p>
+    <p> Total Price: <%= order.get_total_price%></p>
+
+<%= button_to 'Completed', order_path(order),method: :put %>
+
+  </div>
+
+  <div style="width:50%">
+    <p> Items:</p>
+
+    <%order.items.each do |item| %>
+
+    <p style="margin-left: 15px" ><%= item.pizza.name%></p>
+    <%if item.adds %>
+      <p style="margin-left: 30px" > Add: <%= item.adds%></p>
+    <%end%>
+
+    <%if item.removes %>
+      <p style="margin-left: 30px"> Remove: <%= item.removes%></p>
+    <%end%>
+    <%end%>
+
+  </div>
+</div>
+
+<%end%>
+</div>
